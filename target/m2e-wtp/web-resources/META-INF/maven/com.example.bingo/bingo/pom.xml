@@ -214,6 +214,11 @@
             <scope>test</scope>
         </dependency>
         -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope> <!-- (2) -->
+        </dependency>
 
         <!-- Please set the appropriate version according to the web browser. -->
         <dependency>
