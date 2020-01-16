@@ -23,7 +23,7 @@
     </sec:http>
 
     <sec:authentication-manager>
-        <sec:authentication-provider user-service-ref="UserAccountDetailsService" />
+        <sec:authentication-provider user-service-ref="userAccountDetailsService" />
     </sec:authentication-manager>
 
 

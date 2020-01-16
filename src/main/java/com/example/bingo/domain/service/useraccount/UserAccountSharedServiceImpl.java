@@ -13,13 +13,13 @@ import com.example.bingo.domain.repository.useraccount.UserAccountRepository;
 public class UserAccountSharedServiceImpl implements UserAccountSharedService {
 
 	@Inject
-	UserAccountRepository userRepository;
+	UserAccountRepository userAccountRepository;
 	
 	@Transactional(readOnly=true)
 	@Override
 	public UserAccount findOne(String userName) {
 		
-		UserAccount userAccount = userRepository.findByUserName(userName).orElse(null);
+		UserAccount userAccount = userAccountRepository.findByUserName(userName).orElse(null);
 		
 		if(userAccount == null) {
 			throw new ResourceNotFoundException("User Not Found. userName=" + userName);

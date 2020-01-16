@@ -5,12 +5,14 @@ import javax.inject.Inject;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 
 import com.example.bingo.domain.model.UserAccount;
 import com.example.bingo.domain.service.useraccount.UserAccountSharedService;
 
+@Service
 public class UserAccountDetailsService implements UserDetailsService {
 
 	@Inject
