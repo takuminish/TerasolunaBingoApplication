@@ -6,6 +6,7 @@ import javax.validation.groups.Default;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -94,7 +95,12 @@ public class BingoRoomController {
 	
 	@PostMapping("create") 
 	public String create(@Validated({Default.class, BingoRoomCreate.class}) BingoRoomForm form,
-			@AuthenticationPrincipal UserAccountDetails userAccountDetails) {
+			@AuthenticationPrincipal UserAccountDetails userAccountDetails,
+			BindingResult bindingResult) {
+		
+		if (bindingResult.hasErrors()) {
+			return "redirect:/host/home";
+		}
 		
 		BingoRoom bingoRoom = beanMapper.map(form, BingoRoom.class);
 		

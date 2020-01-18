@@ -2,6 +2,9 @@ package com.example.bingo.app.bingoroom;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import lombok.Data;
 
 @Data
@@ -20,7 +23,8 @@ public class BingoRoomForm implements Serializable {
 	public static interface BingoRoomDelete {
 		
 	}
-		
+	
+	@NotNull(groups={BingoRoomCreate.class, BingoRoomUpdate.class})
 	private String roomName;
 	
 }
