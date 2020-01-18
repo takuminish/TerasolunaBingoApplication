@@ -1,6 +1,8 @@
 package com.example.bingo.app.home;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -43,8 +45,10 @@ public class HomeController {
 		// 認証したログインユーザを取得
 		UserAccount userAccount = userAccountDetails.getUserAccount();
 		
-		// ログインユーザが登録したBingoRoomを全て取得
-		List<BingoRoom> bingoRoomList = bingoRoomService.findAllByCreateUser(userAccount);
+		// ログインユーザが登録したBingoRoomを全て取得し登録日時の逆順で表示させる
+		List<BingoRoom> bingoRoomList = bingoRoomService.findAllByCreateUser(userAccount)
+				.stream().sorted(Comparator.comparing(BingoRoom::getCreatedAt).reversed())
+				.collect(Collectors.toList());
 		model.addAttribute("bingoRoomList", bingoRoomList);
 		
 		return "/home/index";
