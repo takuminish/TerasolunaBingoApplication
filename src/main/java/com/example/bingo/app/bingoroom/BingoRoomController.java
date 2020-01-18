@@ -57,5 +57,17 @@ public class BingoRoomController {
 		
 		return "redirect:/host/home";
 	}
+	
+	@PostMapping("start")
+	public String start() {
+		
+		return "redirect:/host/bingoRoom/{bingoRoomId}/game";
+	}
+	
+	@PostMapping("finish")
+	public String finish() {
+		
+		return "redirect:/host/home";
+	}
 
 }
