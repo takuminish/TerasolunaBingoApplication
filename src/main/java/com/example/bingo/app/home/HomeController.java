@@ -8,8 +8,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.bingo.app.bingoroom.BingoRoomForm;
 import com.example.bingo.domain.model.BingoRoom;
 import com.example.bingo.domain.model.UserAccount;
 import com.example.bingo.domain.service.bingoroom.BingoRoomService;
@@ -22,6 +24,11 @@ public class HomeController {
 	@Inject
 	BingoRoomService bingoRoomService;
 	
+	@ModelAttribute
+	public BingoRoomForm setUpForm() {
+		BingoRoomForm form = new BingoRoomForm();
+		return form;
+	}
 
 	/**
 	 *  ログインしたユーザのホーム画面を返す

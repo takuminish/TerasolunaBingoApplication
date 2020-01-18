@@ -1,6 +1,7 @@
 package com.example.bingo.domain.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +29,10 @@ public class BingoRoom implements Serializable {
 	private boolean started;
 	
 	private boolean finished;
+	
+	private Date createdAt;
+	
+	private Date updatedAt;
 	
 	@OneToOne
 	@JoinColumn(name="createUserId", referencedColumnName = "userId")

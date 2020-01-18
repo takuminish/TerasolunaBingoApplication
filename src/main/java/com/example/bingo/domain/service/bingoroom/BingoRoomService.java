@@ -13,10 +13,12 @@ public interface BingoRoomService {
 	
 	BingoRoom create(BingoRoom bingoRoom);
 	
-	BingoRoom Start(BingoRoom bingoRoom);
+	BingoRoom update(BingoRoom bingoRoom);
 	
-	BingoRoom Finish(BingoRoom bingoRoom);
+	BingoRoom Start(Long bingoRoomId);
 	
-	void delete(String bingoId);
+	BingoRoom Finish(Long bingoRoomId);
+	
+	void delete(long bingoRoomId);
 
 }
