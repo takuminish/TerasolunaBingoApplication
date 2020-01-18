@@ -5,7 +5,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
@@ -22,14 +24,20 @@ public class BingoRoomController {
 	@Inject 
 	BingoRoomService bingoRoomService;
 	
-	@GetMapping
-	public String index(@PathVariable String bingoRoomIdstr, Model model, RedirectAttributes attributes) {
+	@ModelAttribute
+	public BingoRoomForm setUpForm() {
+		BingoRoomForm form = new BingoRoomForm();
+		return form;
+	}
+	
+	@GetMapping("edit")
+	public String edit(@PathVariable String bingoRoomIdstr, Model model, RedirectAttributes attributes) {
 		
 		try {
 			long bingoRoomId = Long.parseLong(bingoRoomIdstr);
 		    BingoRoom bingoRoom = bingoRoomService.findByBingoRoomId(bingoRoomId);
 		    model.addAttribute("bingoRoom", bingoRoom);
-			return "bingoroom/index";
+			return "bingoroom/update";
 			
 		} catch(ResourceNotFoundException e) {
 			attributes.addFlashAttribute(ResultMessages.error()
@@ -42,6 +50,12 @@ public class BingoRoomController {
 		
 		return "redirect:/host/home";
 		
+	}
+	
+	@PostMapping("edit")
+	public String update() {
+		
+		return "redirect:/host/home";
 	}
 
 }
