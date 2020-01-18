@@ -9,7 +9,7 @@ public interface BingoRoomService {
 	
 	List<BingoRoom> findAllByCreateUser(UserAccount userAccount);
 	
-	BingoRoom findByBingoId(String bingoId);
+	BingoRoom findByBingoRoomId(long bingoId);
 	
 	BingoRoom create(BingoRoom bingoRoom);
 	

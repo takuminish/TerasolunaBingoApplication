@@ -5,10 +5,16 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Service;
+import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
+import org.terasoluna.gfw.common.message.ResultMessage;
+import org.terasoluna.gfw.common.message.ResultMessages;
+
 import com.example.bingo.domain.model.BingoRoom;
 import com.example.bingo.domain.model.UserAccount;
 import com.example.bingo.domain.repository.biingoroom.BingoRoomRepository;
 
+@Service
 public class BingoRoomServiceImpl implements BingoRoomService {
 
 	@Inject
@@ -21,9 +27,17 @@ public class BingoRoomServiceImpl implements BingoRoomService {
 	}
 
 	@Override
-	public BingoRoom findByBingoId(String bingoId) {
-		// TODO Auto-generated method stub
-		return null;
+	public BingoRoom findByBingoRoomId(long bingoRoomId) {
+		BingoRoom bingoRoom = bingoRoomRepository.findById(bingoRoomId).orElse(null);
+		
+		// BingoRoomが見つからなかったらException
+		if (bingoRoom == null) {
+			ResultMessages messages = ResultMessages.error();
+			messages.add(ResultMessage
+					.fromText("[E404] BingoRoom is NotFound"));
+			throw new ResourceNotFoundException(messages);
+		}
+		return bingoRoom;
 	}
 
 	@Override
