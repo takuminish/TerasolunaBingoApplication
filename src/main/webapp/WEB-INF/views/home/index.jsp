@@ -11,7 +11,7 @@
 
 <ul>
 <c:forEach items="${bingoRoomList}" var="bingoRoom">
-<li><a href="${pageContext.request.contextPath}/host/bingoRoom/${bingoRoom.bingoRoomId}">${f:h(bingoRoom.roomName)}</a>
+<li><a href="${pageContext.request.contextPath}/host/bingoRoom/${bingoRoom.bingoRoomId}/edit">${f:h(bingoRoom.roomName)}</a>
 <form:form action="${pageContext.request.contextPath}/host/bingoRoom/${bingoRoom.bingoRoomId}/start" 
 method="POST" modelAttribute="bingoRoomForm">
     <form:button>ゲーム開始</form:button>

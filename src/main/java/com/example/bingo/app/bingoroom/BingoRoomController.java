@@ -42,17 +42,14 @@ public class BingoRoomController {
 		return form;
 	}
 	
-	// TODO
-	/*
-	
-	@GetMapping("edit")
+	@GetMapping("{bingoRoomIdstr}/edit")
 	public String edit(@PathVariable String bingoRoomIdstr, Model model, RedirectAttributes attributes) {
 		
 		try {
 			long bingoRoomId = Long.parseLong(bingoRoomIdstr);
 		    BingoRoom bingoRoom = bingoRoomService.findByBingoRoomId(bingoRoomId);
 		    model.addAttribute("bingoRoom", bingoRoom);
-			return "bingoroom/update";
+			return "bingoroom/edit";
 			
 		} catch(ResourceNotFoundException e) {
 			attributes.addFlashAttribute(ResultMessages.error()
@@ -67,13 +64,18 @@ public class BingoRoomController {
 		
 	}
 
-	@PostMapping("edit")
-	public String update(@PathVariable String bingoRoomIdstr, @Validated({Default.class, BingoRoomUpdate.class}) BingoRoomForm bingoRoomForm, Model model, RedirectAttributes attributes) {
+	@PostMapping("{bingoRoomIdstr}/edit")
+	public String update(@PathVariable String bingoRoomIdstr,
+			@Validated({Default.class, BingoRoomCreate.class}) BingoRoomForm form,
+			BindingResult bindingResult,
+			RedirectAttributes attributes) {
+		
 		try {
 			long bingoRoomId = Long.parseLong(bingoRoomIdstr);
-			BingoRoom bingoRoom = beanMapper.map(bingoRoomForm, BingoRoom)
+			BingoRoom bingoRoom = beanMapper.map(form, BingoRoom.class);
+			bingoRoom.setBingoRoomId(bingoRoomId);
 		    bingoRoomService.update(bingoRoom);
-			return "bingoroom/update";
+		    return "redirect:/host/home";
 			
 		} catch(ResourceNotFoundException e) {
 			attributes.addFlashAttribute(ResultMessages.error()
@@ -85,7 +87,7 @@ public class BingoRoomController {
 		}
 		return "redirect:/host/home";
 	}
-	*/
+	
 	
 	@GetMapping("create")
 	public String createForm() {
@@ -95,8 +97,8 @@ public class BingoRoomController {
 	
 	@PostMapping("create") 
 	public String create(@Validated({Default.class, BingoRoomCreate.class}) BingoRoomForm form,
-			@AuthenticationPrincipal UserAccountDetails userAccountDetails,
-			BindingResult bindingResult) {
+			BindingResult bindingResult,
+			@AuthenticationPrincipal UserAccountDetails userAccountDetails) {
 		
 		if (bindingResult.hasErrors()) {
 			return "redirect:/host/home";

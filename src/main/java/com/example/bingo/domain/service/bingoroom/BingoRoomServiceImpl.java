@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 import org.terasoluna.gfw.common.message.ResultMessage;
@@ -17,11 +18,13 @@ import com.example.bingo.domain.model.UserAccount;
 import com.example.bingo.domain.repository.biingoroom.BingoRoomRepository;
 
 @Service
+@Transactional
 public class BingoRoomServiceImpl implements BingoRoomService {
 
 	@Inject
 	BingoRoomRepository bingoRoomRepository;
 	
+	@Transactional(readOnly=true)
 	@Override
 	public List<BingoRoom> findAllByCreateUser(UserAccount userAccount) {
 		List<BingoRoom> bingoRoomList = bingoRoomRepository.findAllByCreateUserAccountUserId(userAccount.getUserId());
@@ -53,7 +56,9 @@ public class BingoRoomServiceImpl implements BingoRoomService {
 	}
 	
 	public BingoRoom update(BingoRoom bingoRoom) {
-		bingoRoomRepository.save(bingoRoom);
+		
+		BingoRoom updatedBingoRoom = this.findByBingoRoomId(bingoRoom.getBingoRoomId());
+		updatedBingoRoom.setRoomName(bingoRoom.getRoomName());
 		return bingoRoom;
 	}
 

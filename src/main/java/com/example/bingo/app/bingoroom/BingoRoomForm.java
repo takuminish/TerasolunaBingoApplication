@@ -24,6 +24,7 @@ public class BingoRoomForm implements Serializable {
 		
 	}
 	
+	@Size(min=1, groups= {BingoRoomCreate.class, BingoRoomUpdate.class})
 	@NotNull(groups={BingoRoomCreate.class, BingoRoomUpdate.class})
 	private String roomName;
 	
