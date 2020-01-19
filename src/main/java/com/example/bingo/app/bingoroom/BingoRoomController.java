@@ -108,7 +108,7 @@ public class BingoRoomController {
         try {
             long bingoRoomId = Long.parseLong(bingoRoomIdstr);
             bingoRoomService.Start(bingoRoomId);
-            // return "redirect:/host/bingoRoom/{bingoRoomId}/game";
+            return "redirect:/host/bingoRoom/{bingoRoomId}/BingoGame";
         } catch (ResourceNotFoundException e) {
             attributes.addFlashAttribute(ResultMessages.error().add(ResultMessage.fromText(e.getMessage())));
         } catch (BusinessException e) {
