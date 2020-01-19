@@ -1,5 +1,7 @@
 package com.example.bingo.domain.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,10 +21,13 @@ public class Bingo {
     private long bingoId;
 
     @NotNull
-    String bingoValue;
+    private String bingoValue;
+
+    @NotNull
+    private Date createdAt;
 
     @OneToOne
     @JoinColumn(name = "bingoRoomId", referencedColumnName = "bingoRoomId")
     @NotNull
-    BingoRoom bingoRoom;
+    private BingoRoom bingoRoom;
 }
