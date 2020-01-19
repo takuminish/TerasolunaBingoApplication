@@ -1,5 +1,9 @@
 package com.example.bingo.app.bingo;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -12,7 +16,9 @@ import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 import org.terasoluna.gfw.common.message.ResultMessage;
 import org.terasoluna.gfw.common.message.ResultMessages;
 
+import com.example.bingo.domain.model.Bingo;
 import com.example.bingo.domain.model.BingoRoom;
+import com.example.bingo.domain.service.bingo.BingoService;
 import com.example.bingo.domain.service.bingoroom.BingoRoomService;
 
 @Controller
@@ -21,6 +27,9 @@ public class BingoContoller {
 
     @Inject
     BingoRoomService bingoRoomService;
+
+    @Inject
+    BingoService bingoService;
 
     @GetMapping
     public String index(@PathVariable String bingoRoomIdstr, Model model, RedirectAttributes attributes) {
@@ -43,6 +52,11 @@ public class BingoContoller {
             attributes.addFlashAttribute(ResultMessages.error().add(ResultMessage.fromText("ゲームが開始されていないか、終了しています。")));
             return "redirect:/host/home";
         }
+
+        List<Bingo> bingoList = bingoService.findAllByBingoRoom(bingoRoom).stream()
+                .sorted(Comparator.comparing(Bingo::getCreatedAt)).collect(Collectors.toList());
+
+        model.addAttribute("bingoList", bingoList);
 
         return "bingogame/index";
     }
