@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class TopController {
 
-	@GetMapping
-	public String index() {
-		
-		return "top/index";
-	}
+    @GetMapping
+    public String index() {
+
+        return "top/index";
+    }
 }

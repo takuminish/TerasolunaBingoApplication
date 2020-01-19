@@ -19,34 +19,31 @@ import com.example.bingo.domain.service.bingoroom.BingoRoomService;
 @RequestMapping("/host/bingoRoom/{bingoRoomIdstr}/bingoGame")
 public class BingoContoller {
 
-	@Inject
-	BingoRoomService bingoRoomService;
-	
-	@GetMapping
-	public String index(@PathVariable String bingoRoomIdstr, Model model, RedirectAttributes attributes) {
-		
-		BingoRoom bingoRoom;
-		
-		try {
-			long bingoRoomId = Long.parseLong(bingoRoomIdstr);
-		    bingoRoom = bingoRoomService.findByBingoRoomId(bingoRoomId);
-		} catch(ResourceNotFoundException e) {
-			attributes.addFlashAttribute(ResultMessages.error()
-					.add(ResultMessage.fromText(e.getMessage())));
-			return "redirect:/host/home";
-		
-		} catch(NumberFormatException e) {
-			attributes.addFlashAttribute(ResultMessages.error()
-					.add(ResultMessage.fromText("Idが無効です。")));
-			return "redirect:/host/home";
-		}
-		
-		if (!bingoRoom.isStarted() || bingoRoom.isFinished()) {
-			attributes.addFlashAttribute(ResultMessages.error()
-					.add(ResultMessage.fromText("ゲームが開始されていないか、終了しています。")));
-			return "redirect:/host/home";
-		}
-		
-		return "bingogame/index";
-	}
+    @Inject
+    BingoRoomService bingoRoomService;
+
+    @GetMapping
+    public String index(@PathVariable String bingoRoomIdstr, Model model, RedirectAttributes attributes) {
+
+        BingoRoom bingoRoom;
+
+        try {
+            long bingoRoomId = Long.parseLong(bingoRoomIdstr);
+            bingoRoom = bingoRoomService.findByBingoRoomId(bingoRoomId);
+        } catch (ResourceNotFoundException e) {
+            attributes.addFlashAttribute(ResultMessages.error().add(ResultMessage.fromText(e.getMessage())));
+            return "redirect:/host/home";
+
+        } catch (NumberFormatException e) {
+            attributes.addFlashAttribute(ResultMessages.error().add(ResultMessage.fromText("Idが無効です。")));
+            return "redirect:/host/home";
+        }
+
+        if (!bingoRoom.isStarted() || bingoRoom.isFinished()) {
+            attributes.addFlashAttribute(ResultMessages.error().add(ResultMessage.fromText("ゲームが開始されていないか、終了しています。")));
+            return "redirect:/host/home";
+        }
+
+        return "bingogame/index";
+    }
 }

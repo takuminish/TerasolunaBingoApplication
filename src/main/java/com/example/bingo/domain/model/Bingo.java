@@ -14,15 +14,15 @@ import lombok.Data;
 @Data
 public class Bingo {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long bingoId;
-	
-	@NotNull
-	String bingoValue;
-	
-	@OneToOne
-	@JoinColumn(name="bingoRoomId", referencedColumnName = "bingoRoomId")
-	@NotNull
-	BingoRoom bingoRoom;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long bingoId;
+
+    @NotNull
+    String bingoValue;
+
+    @OneToOne
+    @JoinColumn(name = "bingoRoomId", referencedColumnName = "bingoRoomId")
+    @NotNull
+    BingoRoom bingoRoom;
 }

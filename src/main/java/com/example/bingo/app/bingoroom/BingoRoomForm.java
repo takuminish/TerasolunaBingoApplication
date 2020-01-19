@@ -9,23 +9,23 @@ import lombok.Data;
 
 @Data
 public class BingoRoomForm implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	
-	public static interface BingoRoomCreate {
-		
-	};
-	
-	public static interface BingoRoomUpdate {
-		
-	}
-	
-	public static interface BingoRoomDelete {
-		
-	}
-	
-	@Size(min=1, groups= {BingoRoomCreate.class, BingoRoomUpdate.class})
-	@NotNull(groups={BingoRoomCreate.class, BingoRoomUpdate.class})
-	private String roomName;
-	
+
+    private static final long serialVersionUID = 1L;
+
+    public static interface BingoRoomCreate {
+
+    };
+
+    public static interface BingoRoomUpdate {
+
+    }
+
+    public static interface BingoRoomDelete {
+
+    }
+
+    @Size(min = 1, groups = { BingoRoomCreate.class, BingoRoomUpdate.class })
+    @NotNull(groups = { BingoRoomCreate.class, BingoRoomUpdate.class })
+    private String roomName;
+
 }

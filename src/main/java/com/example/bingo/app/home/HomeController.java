@@ -23,34 +23,33 @@ import com.example.bingo.domain.service.useraccountdetails.UserAccountDetails;
 @RequestMapping("/host/home")
 public class HomeController {
 
-	@Inject
-	BingoRoomService bingoRoomService;
-	
-	@ModelAttribute
-	public BingoRoomForm setUpForm() {
-		BingoRoomForm form = new BingoRoomForm();
-		return form;
-	}
+    @Inject
+    BingoRoomService bingoRoomService;
 
-	/**
-	 *  ログインしたユーザのホーム画面を返す
-	 * @param userAccountDetails
-	 * @param model
-	 * @return
-	 */
-	@GetMapping
-	public String index(@AuthenticationPrincipal UserAccountDetails userAccountDetails,
-			Model model) {
-		
-		// 認証したログインユーザを取得
-		UserAccount userAccount = userAccountDetails.getUserAccount();
-		
-		// ログインユーザが登録したBingoRoomを全て取得し登録日時の逆順で表示させる
-		List<BingoRoom> bingoRoomList = bingoRoomService.findAllByCreateUser(userAccount)
-				.stream().sorted(Comparator.comparing(BingoRoom::getCreatedAt).reversed())
-				.collect(Collectors.toList());
-		model.addAttribute("bingoRoomList", bingoRoomList);
-		
-		return "/home/index";
-	}
+    @ModelAttribute
+    public BingoRoomForm setUpForm() {
+        BingoRoomForm form = new BingoRoomForm();
+        return form;
+    }
+
+    /**
+     * ログインしたユーザのホーム画面を返す
+     * 
+     * @param userAccountDetails
+     * @param model
+     * @return
+     */
+    @GetMapping
+    public String index(@AuthenticationPrincipal UserAccountDetails userAccountDetails, Model model) {
+
+        // 認証したログインユーザを取得
+        UserAccount userAccount = userAccountDetails.getUserAccount();
+
+        // ログインユーザが登録したBingoRoomを全て取得し登録日時の逆順で表示させる
+        List<BingoRoom> bingoRoomList = bingoRoomService.findAllByCreateUser(userAccount).stream()
+                .sorted(Comparator.comparing(BingoRoom::getCreatedAt).reversed()).collect(Collectors.toList());
+        model.addAttribute("bingoRoomList", bingoRoomList);
+
+        return "/home/index";
+    }
 }

@@ -7,7 +7,7 @@ import com.example.bingo.domain.model.BingoRoom;
 
 public interface BingoService {
 
-	public Bingo create(Bingo bingo);
-	
-	public List<Bingo> findAllByBingoRoom(BingoRoom bingoRoom);
+    public Bingo create(Bingo bingo);
+
+    public List<Bingo> findAllByBingoRoom(BingoRoom bingoRoom);
 }

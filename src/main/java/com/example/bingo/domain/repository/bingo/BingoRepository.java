@@ -8,5 +8,5 @@ import com.example.bingo.domain.model.Bingo;
 
 public interface BingoRepository extends JpaRepository<Bingo, Long> {
 
-	List<Bingo> findAllByBingoRoomBingoRoomId(long bingoRoomId);
+    List<Bingo> findAllByBingoRoomBingoRoomId(long bingoRoomId);
 }

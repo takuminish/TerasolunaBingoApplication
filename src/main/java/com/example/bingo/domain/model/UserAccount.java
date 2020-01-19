@@ -13,19 +13,19 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="userAccount")
+@Table(name = "userAccount")
 public class UserAccount implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long userId;
-	
-	@NotNull
-	private String userName;
-	
-	@NotNull
-	private String password;
-		
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long userId;
+
+    @NotNull
+    private String userName;
+
+    @NotNull
+    private String password;
+
 }

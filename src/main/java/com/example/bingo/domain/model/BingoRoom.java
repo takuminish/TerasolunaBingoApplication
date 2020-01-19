@@ -16,32 +16,32 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="bingoRoom")
+@Table(name = "bingoRoom")
 public class BingoRoom implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long bingoRoomId;
-	
-	@NotNull
-	private String roomName;
-	
-	@NotNull
-	private boolean started;
-	
-	@NotNull
-	private boolean finished;
-	
-	@NotNull
-	private Date createdAt;
-	
-	@NotNull
-	private Date updatedAt;
-	
-	@OneToOne
-	@JoinColumn(name="createUserId", referencedColumnName = "userId")
-	private UserAccount createUserAccount;
-	
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long bingoRoomId;
+
+    @NotNull
+    private String roomName;
+
+    @NotNull
+    private boolean started;
+
+    @NotNull
+    private boolean finished;
+
+    @NotNull
+    private Date createdAt;
+
+    @NotNull
+    private Date updatedAt;
+
+    @OneToOne
+    @JoinColumn(name = "createUserId", referencedColumnName = "userId")
+    private UserAccount createUserAccount;
+
 }

@@ -15,20 +15,20 @@ import com.example.bingo.domain.repository.bingo.BingoRepository;
 @Transactional
 public class BingoServiceImpl implements BingoService {
 
-	@Inject
-	BingoRepository bingoRepository;
-	
-	@Override
-	public Bingo create(Bingo bingo) {
-		bingoRepository.save(bingo);
-		return bingo;
-	}
+    @Inject
+    BingoRepository bingoRepository;
 
-	@Transactional(readOnly=true)
-	@Override
-	public List<Bingo> findAllByBingoRoom(BingoRoom bingoRoom) {
-		List<Bingo> bingoList = bingoRepository.findAllByBingoRoomBingoRoomId(bingoRoom.getBingoRoomId());
-		return bingoList;
-	}
+    @Override
+    public Bingo create(Bingo bingo) {
+        bingoRepository.save(bingo);
+        return bingo;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Bingo> findAllByBingoRoom(BingoRoom bingoRoom) {
+        List<Bingo> bingoList = bingoRepository.findAllByBingoRoomBingoRoomId(bingoRoom.getBingoRoomId());
+        return bingoList;
+    }
 
 }

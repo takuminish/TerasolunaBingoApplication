@@ -15,19 +15,19 @@ import com.example.bingo.domain.service.useraccount.UserAccountSharedService;
 @Service
 public class UserAccountDetailsService implements UserDetailsService {
 
-	@Inject
-	UserAccountSharedService userAccountSharedService;
-	
-	@Transactional(readOnly=true)
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
-		try {
-		    UserAccount userAccount = userAccountSharedService.findOne(username);
-		    return new UserAccountDetails(userAccount);
-		} catch(ResourceNotFoundException e) {
-			throw new UsernameNotFoundException("user NotFOund", e);
-		}
-	}
+    @Inject
+    UserAccountSharedService userAccountSharedService;
+
+    @Transactional(readOnly = true)
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        try {
+            UserAccount userAccount = userAccountSharedService.findOne(username);
+            return new UserAccountDetails(userAccount);
+        } catch (ResourceNotFoundException e) {
+            throw new UsernameNotFoundException("user NotFOund", e);
+        }
+    }
 
 }

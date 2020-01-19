@@ -4,6 +4,6 @@ import com.example.bingo.domain.model.UserAccount;
 
 public interface UserAccountSharedService {
 
-	UserAccount findOne(String userName);
-	
+    UserAccount findOne(String userName);
+
 }

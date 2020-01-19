@@ -4,6 +4,6 @@
 <title>Bingo!</title>
 </head>
 <body>
-Top画面
+  <p>Top画面</p>
 </body>
 </html>

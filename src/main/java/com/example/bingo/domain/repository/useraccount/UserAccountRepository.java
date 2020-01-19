@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.bingo.domain.model.UserAccount;
 
-public interface UserAccountRepository extends JpaRepository<UserAccount, Long>{
+public interface UserAccountRepository extends JpaRepository<UserAccount, Long> {
 
-	Optional<UserAccount> findByUserName(String userName);
-	
+    Optional<UserAccount> findByUserName(String userName);
+
 }

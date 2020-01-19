@@ -12,20 +12,20 @@ import com.example.bingo.domain.repository.useraccount.UserAccountRepository;
 @Service
 public class UserAccountSharedServiceImpl implements UserAccountSharedService {
 
-	@Inject
-	UserAccountRepository userAccountRepository;
-	
-	@Transactional(readOnly=true)
-	@Override
-	public UserAccount findOne(String userName) {
-		
-		UserAccount userAccount = userAccountRepository.findByUserName(userName).orElse(null);
-		
-		if(userAccount == null) {
-			throw new ResourceNotFoundException("User Not Found. userName=" + userName);
-		}
-		
-		return userAccount;
-	}
+    @Inject
+    UserAccountRepository userAccountRepository;
+
+    @Transactional(readOnly = true)
+    @Override
+    public UserAccount findOne(String userName) {
+
+        UserAccount userAccount = userAccountRepository.findByUserName(userName).orElse(null);
+
+        if (userAccount == null) {
+            throw new ResourceNotFoundException("User Not Found. userName=" + userName);
+        }
+
+        return userAccount;
+    }
 
 }
