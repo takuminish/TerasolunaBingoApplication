@@ -11,8 +11,8 @@
   <sec:http>
     <sec:form-login login-page="/login/loginForm"
       authentication-failure-url="/login/loginForm?error=ture"
-      default-target-url="/home" />
-    <sec:logout logout-success-url="/"
+      default-target-url="/host/home" />
+    <sec:logout logout-success-url="/login/loginForm"
       delete-cookies="JSESSIONID" />
     <sec:access-denied-handler
       ref="accessDeniedHandler" />
