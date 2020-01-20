@@ -13,6 +13,7 @@
 </head>
 <body>
 
+<button onclick="location.href='${pageContext.request.contextPath}/host/home'">ゲーム中断</button>
   <form:form
     action="${pageContext.request.contextPath}/host/bingoRoom/${bingoRoom.bingoRoomId}/finish"
     method="POST" modelAttribute="bingoRoomForm">

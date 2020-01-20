@@ -117,6 +117,6 @@ public class BingoContoller {
         bingoResult.setBingoRoom(bingoRoom);
         bingoService.create(bingoResult);
 
-        return index(bingoRoomIdstr, model, attributes);
+        return "redirect:/host/bingoRoom/" + bingoRoom.getBingoRoomId() + "/bingoGame";
     }
 }
