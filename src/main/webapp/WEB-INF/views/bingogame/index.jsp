@@ -28,5 +28,13 @@
   <c:forEach items="${bingoResultList}" var="bingoResult">
     <p>${bingoResult.bingoValue}</p>
   </c:forEach>
+
+  <form:form
+    action="${pageContext.request.contextPath}/host/bingoRoom/${bingoRoom.bingoRoomId}/bingoGame/lottery"
+    method="POST" modelAttribute="bingoForm">
+    <form:input path="bingoValue" />
+    <form:hidden path="bingoRoomId" value="${bingoRoom.bingoRoomId}" />
+    <form:button>抽選</form:button>
+  </form:form>
 </body>
 </html>

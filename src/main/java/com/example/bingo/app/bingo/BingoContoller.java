@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
@@ -23,6 +26,7 @@ import com.example.bingo.domain.model.BingoResult;
 import com.example.bingo.domain.model.BingoRoom;
 import com.example.bingo.domain.service.bingo.BingoService;
 import com.example.bingo.domain.service.bingoroom.BingoRoomService;
+import com.github.dozermapper.core.Mapper;
 
 @Controller
 @RequestMapping("/host/bingoRoom/{bingoRoomIdstr}/bingoGame")
@@ -34,9 +38,18 @@ public class BingoContoller {
     @Inject
     BingoService bingoService;
 
+    @Inject
+    Mapper beanMapper;
+
     @ModelAttribute
-    public BingoRoomForm setUpForm() {
+    public BingoRoomForm setUpBingoRoomForm() {
         BingoRoomForm form = new BingoRoomForm();
+        return form;
+    }
+
+    @ModelAttribute
+    public BingoForm setUpBingoForm() {
+        BingoForm form = new BingoForm();
         return form;
     }
 
@@ -84,5 +97,26 @@ public class BingoContoller {
         model.addAttribute("bingoCandiateList", bingoCandidateList);
 
         return "bingogame/index";
+    }
+
+    @PostMapping("lottery")
+    public String lottery(@PathVariable String bingoRoomIdstr, Model model, RedirectAttributes attributes,
+            @Valid BingoForm form, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return index(bingoRoomIdstr, model, attributes);
+        }
+
+        BingoRoom bingoRoom = bingoRoomService.findByBingoRoomId(form.getBingoRoomId());
+        List<BingoResult> bingoResultList = bingoService.findAllByBingoRoom(bingoRoom);
+        BingoResult bingoResult = beanMapper.map(form, BingoResult.class);
+
+        if (bingoResultList.stream().anyMatch(result -> result.getBingoValue().equals(bingoResult.getBingoValue()))) {
+            return index(bingoRoomIdstr, model, attributes);
+        }
+        bingoResult.setBingoRoom(bingoRoom);
+        bingoService.create(bingoResult);
+
+        return index(bingoRoomIdstr, model, attributes);
     }
 }

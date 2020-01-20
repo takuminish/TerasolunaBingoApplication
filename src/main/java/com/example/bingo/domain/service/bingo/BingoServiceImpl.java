@@ -1,5 +1,6 @@
 package com.example.bingo.domain.service.bingo;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,9 +20,10 @@ public class BingoServiceImpl implements BingoService {
     BingoRepository bingoRepository;
 
     @Override
-    public BingoResult create(BingoResult bingo) {
-        bingoRepository.save(bingo);
-        return bingo;
+    public BingoResult create(BingoResult bingoResult) {
+        bingoResult.setCreatedAt(new Date());
+        bingoRepository.save(bingoResult);
+        return bingoResult;
     }
 
     @Transactional(readOnly = true)
