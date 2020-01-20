@@ -19,13 +19,27 @@ import com.example.bingo.domain.model.UserAccount;
 import com.example.bingo.domain.service.bingoroom.BingoRoomService;
 import com.example.bingo.domain.service.useraccountdetails.UserAccountDetails;
 
+/**
+ * ホーム画面のController
+ * 
+ * @author takuminv
+ *
+ */
 @Controller
 @RequestMapping("/host/home")
 public class HomeController {
 
+    /**
+     * BingoRoomサービスクラス
+     */
     @Inject
     BingoRoomService bingoRoomService;
 
+    /**
+     * BingoRoomFormをmodelに登録
+     * 
+     * @return
+     */
     @ModelAttribute
     public BingoRoomForm setUpForm() {
         BingoRoomForm form = new BingoRoomForm();
@@ -37,7 +51,7 @@ public class HomeController {
      * 
      * @param userAccountDetails
      * @param model
-     * @return
+     * @return /home/indes.jsp
      */
     @GetMapping
     public String index(@AuthenticationPrincipal UserAccountDetails userAccountDetails, Model model) {
