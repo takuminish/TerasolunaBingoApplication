@@ -108,7 +108,7 @@ public class BingoRoomController {
         try {
             long bingoRoomId = Long.parseLong(bingoRoomIdstr);
             bingoRoomService.Start(bingoRoomId);
-            return "redirect:/host/bingoRoom/{bingoRoomId}/BingoGame";
+            return "redirect:/host/bingoRoom/" + bingoRoomId + "/bingoGame";
         } catch (ResourceNotFoundException e) {
             attributes.addFlashAttribute(ResultMessages.error().add(ResultMessage.fromText(e.getMessage())));
         } catch (BusinessException e) {
@@ -122,6 +122,16 @@ public class BingoRoomController {
     @PostMapping("{bingoRoomIdstr}/finish")
     public String finish(@PathVariable String bingoRoomIdstr, Model model, RedirectAttributes attributes) {
 
+        try {
+            long bingoRoomId = Long.parseLong(bingoRoomIdstr);
+            bingoRoomService.Finish(bingoRoomId);
+        } catch (ResourceNotFoundException e) {
+            attributes.addFlashAttribute(ResultMessages.error().add(ResultMessage.fromText(e.getMessage())));
+        } catch (BusinessException e) {
+            attributes.addFlashAttribute(ResultMessages.error().add(ResultMessage.fromText(e.getMessage())));
+        } catch (NumberFormatException e) {
+            attributes.addFlashAttribute(ResultMessages.error().add(ResultMessage.fromText("Idが無効です。")));
+        }
         return "redirect:/host/home";
     }
 

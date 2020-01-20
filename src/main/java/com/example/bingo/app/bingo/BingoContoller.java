@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -16,7 +17,9 @@ import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 import org.terasoluna.gfw.common.message.ResultMessage;
 import org.terasoluna.gfw.common.message.ResultMessages;
 
-import com.example.bingo.domain.model.Bingo;
+import com.example.bingo.app.bingoroom.BingoRoomForm;
+import com.example.bingo.domain.model.BingoCandidate;
+import com.example.bingo.domain.model.BingoResult;
 import com.example.bingo.domain.model.BingoRoom;
 import com.example.bingo.domain.service.bingo.BingoService;
 import com.example.bingo.domain.service.bingoroom.BingoRoomService;
@@ -30,6 +33,12 @@ public class BingoContoller {
 
     @Inject
     BingoService bingoService;
+
+    @ModelAttribute
+    public BingoRoomForm setUpForm() {
+        BingoRoomForm form = new BingoRoomForm();
+        return form;
+    }
 
     @GetMapping
     public String index(@PathVariable String bingoRoomIdstr, Model model, RedirectAttributes attributes) {
@@ -53,10 +62,26 @@ public class BingoContoller {
             return "redirect:/host/home";
         }
 
-        List<Bingo> bingoList = bingoService.findAllByBingoRoom(bingoRoom).stream()
-                .sorted(Comparator.comparing(Bingo::getCreatedAt)).collect(Collectors.toList());
+        model.addAttribute("bingoRoom", bingoRoom);
 
-        model.addAttribute("bingoList", bingoList);
+        List<BingoResult> bingoResultList = bingoService.findAllByBingoRoom(bingoRoom).stream()
+                .sorted(Comparator.comparing(BingoResult::getCreatedAt)).collect(Collectors.toList());
+
+        model.addAttribute("bingoResultList", bingoResultList);
+
+        BingoCandidate[][] bingoCandidateList = new BingoCandidate[10][10];
+        for (int bingoValue = 0; bingoValue < 100; bingoValue++) {
+            bingoCandidateList[bingoValue / 10][bingoValue % 10] = new BingoCandidate(bingoValue + "", false);
+
+            for (BingoResult bingoResult : bingoResultList) {
+                if (bingoResult.getBingoValue()
+                        .equals(bingoCandidateList[bingoValue / 10][bingoValue % 10].getBingoValue())) {
+                    bingoCandidateList[bingoValue / 10][bingoValue % 10].setResulted(true);
+                }
+            }
+        }
+
+        model.addAttribute("bingoCandiateList", bingoCandidateList);
 
         return "bingogame/index";
     }

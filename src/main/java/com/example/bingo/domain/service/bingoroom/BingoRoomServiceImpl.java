@@ -80,8 +80,8 @@ public class BingoRoomServiceImpl implements BingoRoomService {
     public BingoRoom Finish(Long bingoRoomId) {
         BingoRoom bingoRoom = this.findByBingoRoomId(bingoRoomId);
 
-        // ビンゴがすでに始まっているor終わっている時はエラー
-        if (bingoRoom.isStarted() || bingoRoom.isFinished()) {
+        // ビンゴがまだ始まっていないor終わっている時はエラー
+        if (!bingoRoom.isStarted() || bingoRoom.isFinished()) {
             ResultMessages messages = ResultMessages.error();
             messages.add(ResultMessage.fromText("[E002] BingoRoom is already started or finished"));
             throw new BusinessException(messages);

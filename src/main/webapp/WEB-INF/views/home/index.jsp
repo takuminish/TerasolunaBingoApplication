@@ -23,7 +23,7 @@
             method="POST" modelAttribute="bingoRoomForm">
             <form:button>ゲーム開始</form:button>
           </form:form>
-        </c:if> <c:if test="${bingoRoom.started}">
+        </c:if> <c:if test="${bingoRoom.started && !bingoRoom.finished}">
           <button
             onclick="location.href='${pageContext.request.contextPath}/host/bingoRoom/${bingoRoom.bingoRoomId}/bingoGame'">ゲーム画面へ</button>
         </c:if> <form:form

@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.bingo.domain.model.Bingo;
+import com.example.bingo.domain.model.BingoResult;
 
-public interface BingoRepository extends JpaRepository<Bingo, Long> {
+public interface BingoRepository extends JpaRepository<BingoResult, Long> {
 
-    List<Bingo> findAllByBingoRoomBingoRoomId(long bingoRoomId);
+    List<BingoResult> findAllByBingoRoomBingoRoomId(long bingoRoomId);
 }
