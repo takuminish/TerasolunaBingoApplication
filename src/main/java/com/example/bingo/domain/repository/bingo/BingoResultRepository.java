@@ -6,7 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.bingo.domain.model.BingoResult;
 
-public interface BingoRepository extends JpaRepository<BingoResult, Long> {
+
+public interface BingoResultRepository extends JpaRepository<BingoResult, Long> {
 
     List<BingoResult> findAllByBingoRoomBingoRoomId(long bingoRoomId);
 }

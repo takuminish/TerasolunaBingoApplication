@@ -10,14 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.bingo.domain.model.BingoResult;
 import com.example.bingo.domain.model.BingoRoom;
-import com.example.bingo.domain.repository.bingo.BingoRepository;
+import com.example.bingo.domain.repository.bingo.BingoResultRepository;
 
 @Service
 @Transactional
 public class BingoServiceImpl implements BingoService {
 
     @Inject
-    BingoRepository bingoRepository;
+    BingoResultRepository bingoRepository;
 
     @Override
     public BingoResult create(BingoResult bingoResult) {
