@@ -1,0 +1,22 @@
+#bingoCandidateTable {
+  border-collapse: collapse;
+}
+
+#bingoCandidateTr, .bingoCandidateTd {
+  border: solid 1px;
+  padding: 10px;
+}
+
+.resulted {
+  background-color: #BA9CC5;
+}
+
+.candidating {
+  background-color: #FF0000;
+  border: solid 1px #FF0000;
+}
+
+.candidated {
+  background-color: #FF0000;
+  border: solid 1px #FF0000;
+}
