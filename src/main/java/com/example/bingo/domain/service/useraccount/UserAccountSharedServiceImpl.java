@@ -9,6 +9,12 @@ import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 import com.example.bingo.domain.model.UserAccount;
 import com.example.bingo.domain.repository.useraccount.UserAccountRepository;
 
+/**
+ * ユーザ用 サービス実装クラス
+ * 
+ * @author takuminv
+ *
+ */
 @Service
 public class UserAccountSharedServiceImpl implements UserAccountSharedService {
 

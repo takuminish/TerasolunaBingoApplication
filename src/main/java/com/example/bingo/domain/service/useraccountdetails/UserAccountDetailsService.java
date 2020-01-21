@@ -12,12 +12,21 @@ import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
 import com.example.bingo.domain.model.UserAccount;
 import com.example.bingo.domain.service.useraccount.UserAccountSharedService;
 
+/**
+ * ログイン用サービスクラス
+ * 
+ * @author takuminv
+ *
+ */
 @Service
 public class UserAccountDetailsService implements UserDetailsService {
 
     @Inject
     UserAccountSharedService userAccountSharedService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
