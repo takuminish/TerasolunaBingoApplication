@@ -16,13 +16,25 @@ import com.example.bingo.domain.model.BingoRoom;
 import com.example.bingo.domain.model.UserAccount;
 import com.example.bingo.domain.repository.biingoroom.BingoRoomRepository;
 
+/**
+ * ビンゴルーム用 サービス実装クラス
+ * 
+ * @author takuminv
+ *
+ */
 @Service
 @Transactional
 public class BingoRoomServiceImpl implements BingoRoomService {
 
+    /**
+     * BingoRoom Entity用 Repository
+     */
     @Inject
     BingoRoomRepository bingoRoomRepository;
 
+    /**
+     * {@inheritDoc}
+     */
     @Transactional(readOnly = true)
     @Override
     public List<BingoRoom> findAllByCreateUser(UserAccount userAccount) {
@@ -30,6 +42,9 @@ public class BingoRoomServiceImpl implements BingoRoomService {
         return bingoRoomList;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BingoRoom findByBingoRoomId(long bingoRoomId) {
         BingoRoom bingoRoom = bingoRoomRepository.findById(bingoRoomId).orElse(null);
@@ -43,6 +58,9 @@ public class BingoRoomServiceImpl implements BingoRoomService {
         return bingoRoom;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BingoRoom create(BingoRoom bingoRoom) {
         bingoRoom.setStarted(false);
@@ -53,6 +71,9 @@ public class BingoRoomServiceImpl implements BingoRoomService {
         return bingoRoom;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public BingoRoom update(BingoRoom bingoRoom) {
 
         BingoRoom updatedBingoRoom = this.findByBingoRoomId(bingoRoom.getBingoRoomId());
@@ -60,6 +81,9 @@ public class BingoRoomServiceImpl implements BingoRoomService {
         return bingoRoom;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BingoRoom Start(Long bingoRoomId) {
         BingoRoom bingoRoom = this.findByBingoRoomId(bingoRoomId);
@@ -76,6 +100,9 @@ public class BingoRoomServiceImpl implements BingoRoomService {
         return this.update(bingoRoom);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BingoRoom Finish(Long bingoRoomId) {
         BingoRoom bingoRoom = this.findByBingoRoomId(bingoRoomId);
