@@ -12,13 +12,25 @@ import com.example.bingo.domain.model.BingoResult;
 import com.example.bingo.domain.model.BingoRoom;
 import com.example.bingo.domain.repository.bingo.BingoResultRepository;
 
+/**
+ * ビンゴゲーム用サービスの実装クラス
+ * 
+ * @author takuminv
+ *
+ */
 @Service
 @Transactional
-public class BingoServiceImpl implements BingoService {
+public class BingoResultServiceImpl implements BingoResultService {
 
+    /**
+     * BingoResult Entity用 Repository
+     */
     @Inject
     BingoResultRepository bingoRepository;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BingoResult create(BingoResult bingoResult) {
         bingoResult.setCreatedAt(new Date());
@@ -26,6 +38,9 @@ public class BingoServiceImpl implements BingoService {
         return bingoResult;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Transactional(readOnly = true)
     @Override
     public List<BingoResult> findAllByBingoRoom(BingoRoom bingoRoom) {

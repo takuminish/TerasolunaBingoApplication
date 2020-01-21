@@ -24,7 +24,7 @@ import com.example.bingo.app.bingoroom.BingoRoomForm;
 import com.example.bingo.domain.model.BingoCandidate;
 import com.example.bingo.domain.model.BingoResult;
 import com.example.bingo.domain.model.BingoRoom;
-import com.example.bingo.domain.service.bingo.BingoService;
+import com.example.bingo.domain.service.bingo.BingoResultService;
 import com.example.bingo.domain.service.bingoroom.BingoRoomService;
 import com.github.dozermapper.core.Mapper;
 
@@ -48,7 +48,7 @@ public class BingoContoller {
      * Bingoサービスクラス
      */
     @Inject
-    BingoService bingoService; //
+    BingoResultService bingoService; //
 
     /**
      * FormとEntityのMapper
