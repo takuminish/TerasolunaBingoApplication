@@ -30,14 +30,14 @@ import com.example.bingo.domain.repository.biingoroom.BingoRoomRepository;
 @ContextConfiguration(locations = { "classpath:META-INF/spring/test-infra.xml",
         "classpath:META-INF/spring/test-context.xml" })
 @Transactional
-public class BingoRoomRepositoryTest {
+public class BingoRoomRepositoryのfindAllByCreateUserAccountUserIdのテスト {
 
     @Inject
     BingoRoomRepository bingoRoomRepository;
 
     @Test
-    @Sql(scripts = "classpath:META-INF/sql/bingoroom/findAllByCreateUserAccountUserId.sql", config = @SqlConfig(encoding = "utf-8"))
-    public void findAllByCreateUserAccountUserIdのテスト() {
+    @Sql(scripts = "classpath:META-INF/sql/repository/bingoroom/findAllByCreateUserAccountUserId.sql", config = @SqlConfig(encoding = "utf-8"))
+    public void 正常系() {
 
         // 結果照合用データ作成
         UserAccount userAccount = new UserAccount();

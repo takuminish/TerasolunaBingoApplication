@@ -5,6 +5,12 @@ import org.springframework.security.core.userdetails.User;
 
 import com.example.bingo.domain.model.UserAccount;
 
+/**
+ * ログイン
+ * 
+ * @author takuminv
+ *
+ */
 public class UserAccountDetails extends User {
 
     private static final long serialVersionUID = 1L;
