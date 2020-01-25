@@ -21,7 +21,7 @@ import com.example.bingo.domain.model.UserAccount;
 import com.example.bingo.domain.repository.biingoroom.BingoRoomRepository;
 
 /**
- * BingoRoomRepositoryクラスのテスト
+ * BingoRoomRepositoryクラスのfindAllByCreateUserAccountUserIdメソッドのテスト
  * 
  * @author takuminv
  *
@@ -37,14 +37,17 @@ public class BingoRoomRepositoryのfindAllByCreateUserAccountUserIdのテスト 
 
     @Test
     @Sql(scripts = "classpath:META-INF/sql/repository/bingoroom/findAllByCreateUserAccountUserId.sql", config = @SqlConfig(encoding = "utf-8"))
-    public void 正常系() {
+    public void 指定したAccountUserIdに該当するBingoRoomが1件以上存在する場合のテスト() {
 
         // 結果照合用データ作成
+        // UserAccountデータ作成(参照性制約のため)
         UserAccount userAccount = new UserAccount();
         userAccount.setUserId(3);
         userAccount.setPassword(
                 "{pbkdf2}1dd84f42a7a9a173f8f806d736d34939bed6a36e2948e8bfe88801ee5e6e61b815efc389d03165a4");
         userAccount.setUserName("demo");
+
+        // //BingoRoomのデータを3件作成(findAllByCreateUserAccountUserId.sqlでinsertした内容と同様)
         List<BingoRoom> TestBingoRoomList = new ArrayList<BingoRoom>();
 
         BingoRoom TestBingoRoom1 = new BingoRoom();
@@ -63,6 +66,7 @@ public class BingoRoomRepositoryのfindAllByCreateUserAccountUserIdのテスト 
         List<BingoRoom> bingoRoomList = bingoRoomRepository.findAllByCreateUserAccountUserId(3);
 
         // 結果確認
+        // 結果照合用データと同じ件数、IdのBingoRoomが取得できることを確認する
         assertThat(bingoRoomList.size(), is(3));
         assertThat(bingoRoomList.get(0).getBingoRoomId(), is(TestBingoRoom1.getBingoRoomId()));
         assertThat(bingoRoomList.get(1).getBingoRoomId(), is(TestBingoRoom2.getBingoRoomId()));

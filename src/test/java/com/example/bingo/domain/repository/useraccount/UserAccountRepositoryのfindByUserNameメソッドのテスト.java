@@ -26,7 +26,7 @@ public class UserAccountRepositoryのfindByUserNameメソッドのテスト {
 
     @Test
     @Sql(scripts = "classpath:META-INF/sql/repository/useraccount/findByUserName.sql", config = @SqlConfig(encoding = "utf-8"))
-    public void 正常系() {
+    public void 指定したUserNameに該当するUserAccountが存在する場合のテスト() {
 
         // 結果照合用データ作成
         UserAccount TestUserAccount1 = new UserAccount();

@@ -29,7 +29,7 @@ public class BingoResultRepositoryのfindAllByBingoRoomBingoRoomIdのテスト {
 
     @Test
     @Sql(scripts = "classpath:META-INF/sql/repository/bingo/findAllByBingoRoomBingoRoomId.sql", config = @SqlConfig(encoding = "utf-8"))
-    public void 正常系() {
+    public void 指定したBingoRoomIdに該当するBingoResultが1件以上存在する場合のテスト() {
 
         // 結果照合用データ作成
         List<BingoResult> TestBingoResultList = new ArrayList<BingoResult>();
