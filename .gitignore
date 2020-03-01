@@ -7,3 +7,8 @@ target/**
 
 # log
 log/**
+
+# eclipse
+.settings/**
+.project
+.classpath
