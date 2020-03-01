@@ -27,8 +27,8 @@ import com.example.bingo.domain.repository.biingoroom.BingoRoomRepository;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:META-INF/spring/test-infra.xml",
-        "classpath:META-INF/spring/test-context.xml" })
+@ContextConfiguration(locations = { "classpath:META-INF/spring/bingo-infra.xml",
+        "classpath:META-INF/spring/bingo-context.xml" })
 @Transactional
 public class BingoRoomRepositoryのfindAllByCreateUserAccountUserIdのテスト {
 

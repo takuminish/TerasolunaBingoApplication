@@ -29,6 +29,7 @@
     <url>http://terasoluna.org</url>
   </organization>
   <build>
+
     <pluginManagement>
       <plugins>
         <plugin>
@@ -233,4 +234,6 @@
     <encoding>UTF-8</encoding>
     <java-version>1.8</java-version>
   </properties>
+  
+  
 </project>

@@ -1,3 +1,9 @@
 # envFile
-/src/main/resources/META-INF/spring/bingo-env.xml
 /src/main/resources/META-INF/spring/bingo-infra.properties
+/src/test/resources/META-INF/spring/bingo-infra.properties
+
+# target
+target/**
+
+# log
+log/**
